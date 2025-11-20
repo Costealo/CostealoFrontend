@@ -8,7 +8,7 @@ class SectionCard extends StatelessWidget {
   const SectionCard({
     super.key,
     required this.child,
-    this.padding = const EdgeInsets.all(20),
+    this.padding = const EdgeInsets.all(20), required String title,
   });
 
   @override

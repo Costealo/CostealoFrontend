@@ -13,7 +13,9 @@ class CostealoColors {
 
   // ✅ Alias nuevos para que coincidan con profile_screen.dart
   static const Color cardBackground = card;              // usado en ProfileScreen
-  static const Color iconMuted = textSoft;               // iconos secundarios
+  static const Color iconMuted = textSoft;
+
+  static Color? get babyGreen => null;               // iconos secundarios
 }
 
 ThemeData buildCostealoTheme() {

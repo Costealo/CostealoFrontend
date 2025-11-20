@@ -9,6 +9,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionCard(
       padding: const EdgeInsets.all(24),
+      title: '',
       child: Row(
         children: const [
           Expanded(child: _StepOne()),

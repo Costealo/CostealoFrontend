@@ -9,6 +9,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionCard(
       padding: const EdgeInsets.all(32),
+      title: '',
       child: Row(
         children: [
           Expanded(

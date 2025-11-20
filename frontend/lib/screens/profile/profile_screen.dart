@@ -10,6 +10,7 @@ class ProfileScreen extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 24),
       child: SectionCard(
+        title: '',
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -9,6 +9,7 @@ class NewSheetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SectionCard(
       padding: const EdgeInsets.all(24),
+      title: '',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

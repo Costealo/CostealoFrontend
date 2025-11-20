@@ -85,6 +85,7 @@ class _HomeShellState extends State<HomeShell> {
       case SidebarItem.borradores:
         return Center(
           child: SectionCard(
+            title: '',
             child: const Text(
               'Aquí irán las pantallas de planillas y borradores.',
             ),
