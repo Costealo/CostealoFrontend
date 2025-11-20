@@ -1,59 +1,78 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class CostealoColors {
-  // Colores base que ya tenías
-  static const Color primary = Color(0xFF5F8F6B);        // barra lateral / botones
-  static const Color primaryDark = Color(0xFF335F3F);    // énfasis
-  static const Color primaryLight = Color(0xFFE6F3E8);   // fondo general
-  static const Color card = Color(0xFFF7FBF7);           // tarjetas
-  static const Color cardSoft = Color(0xFFEDF7EE);       // tarjetas suaves
-  static const Color accent = Color(0xFF8ECF9B);         // detalles
-  static const Color text = Color(0xFF26412F);           // texto principal
-  static const Color textSoft = Color(0xFF7A9B80);       // texto secundario
+  static const Color primary = Color(0xFF5F8F6B);
+  static const Color primaryDark = Color(0xFF335F3F);
+  static const Color primaryLight = Color(0xFFE6F3E8);
 
-  // ✅ Alias nuevos para que coincidan con profile_screen.dart
-  static const Color cardBackground = card;              // usado en ProfileScreen
-  static const Color iconMuted = textSoft;
+  static const Color card = Color(0xFFF7FBF7);
+  static const Color cardSoft = Color(0xFFEDF7EE);
 
-  static Color? get babyGreen => null;               // iconos secundarios
+  static const Color accent = Color(0xFF8ECF9B);
+
+  static const Color text = Color(0xFF26412F);
+  static const Color textMuted = Color(0xFF7A8C80);
+
+  static const Color danger = Color(0xFFE57373);
 }
 
-ThemeData buildCostealoTheme() {
-  return ThemeData(
-    useMaterial3: true,
-    scaffoldBackgroundColor: CostealoColors.primaryLight,
-    colorScheme: ColorScheme.fromSeed(
-      seedColor: CostealoColors.primary,
-      primary: CostealoColors.primary,
-      background: CostealoColors.primaryLight,
-    ),
-    textTheme: const TextTheme(
-      headlineMedium: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-        color: CostealoColors.text,
+class CostealoTheme {
+  static ThemeData get lightTheme {
+    return ThemeData(
+      useMaterial3: true,
+
+      // --- ColorScheme corregido para evitar warnings deprecated ---
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: CostealoColors.primary,
+        primary: CostealoColors.primary,
+        secondary: CostealoColors.accent,
+        surface: CostealoColors.primaryLight, // << CAMBIO CLAVE
       ),
-      titleMedium: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-        color: CostealoColors.text,
+
+      scaffoldBackgroundColor: CostealoColors.primaryLight,
+
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: CostealoColors.text,
       ),
-      bodyMedium: TextStyle(
-        fontSize: 14,
-        color: CostealoColors.textSoft,
+
+      textTheme: const TextTheme(
+        headlineMedium: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: CostealoColors.text,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 14,
+          color: CostealoColors.text,
+        ),
       ),
-    ),
-    inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: Colors.white,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide.none,
+
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: CostealoColors.primary,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        ),
       ),
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 12,
+
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: CostealoColors.textMuted),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: CostealoColors.primary),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       ),
-    ),
-  );
+    );
+  }
 }

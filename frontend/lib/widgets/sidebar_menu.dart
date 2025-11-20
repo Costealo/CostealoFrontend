@@ -1,130 +1,78 @@
 import 'package:flutter/material.dart';
 import '../theme/costealo_theme.dart';
 
-enum SidebarItem {
-  borradores,
-  planillas,
-  resumen,
-  baseDatos,
-  perfil,
-}
-
 class SidebarMenu extends StatelessWidget {
-  final SidebarItem selected;
-  final ValueChanged<SidebarItem> onItemSelected;
+  final int selectedIndex;
+  final ValueChanged<int> onItemSelected;
 
   const SidebarMenu({
     super.key,
-    required this.selected,
+    required this.selectedIndex,
     required this.onItemSelected,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 90,
-      decoration: const BoxDecoration(
-        color: CostealoColors.primary,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(24),
-          bottomRight: Radius.circular(24),
-        ),
-      ),
+      width: 220,
+      color: CostealoColors.primary,
       child: Column(
         children: [
-          const SizedBox(height: 24),
-          const _Logo(),
           const SizedBox(height: 32),
-          _SidebarButton(
-            icon: Icons.article_outlined,
-            label: 'Borradores',
-            isSelected: selected == SidebarItem.borradores,
-            onTap: () => onItemSelected(SidebarItem.borradores),
+          const Text(
+            'Costealo',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
           ),
-          _SidebarButton(
-            icon: Icons.table_rows_outlined,
-            label: 'Planillas',
-            isSelected: selected == SidebarItem.planillas,
-            onTap: () => onItemSelected(SidebarItem.planillas),
-          ),
-          _SidebarButton(
-            icon: Icons.view_list_outlined,
-            label: 'Resumen',
-            isSelected: selected == SidebarItem.resumen,
-            onTap: () => onItemSelected(SidebarItem.resumen),
-          ),
-          _SidebarButton(
-            icon: Icons.storage_outlined,
-            label: 'Base de datos',
-            isSelected: selected == SidebarItem.baseDatos,
-            onTap: () => onItemSelected(SidebarItem.baseDatos),
-          ),
+          const SizedBox(height: 32),
+          _buildItem(icon: Icons.grid_on, label: 'Planillas', index: 0),
+          _buildItem(icon: Icons.summarize_outlined, label: 'Resumen', index: 1),
+          _buildItem(
+              icon: Icons.storage_outlined, label: 'Base de datos', index: 2),
+          _buildItem(icon: Icons.person_outline, label: 'Perfil', index: 3),
           const Spacer(),
-          _SidebarButton(
-            icon: Icons.person_outline,
-            label: 'Perfil',
-            isSelected: selected == SidebarItem.perfil,
-            onTap: () => onItemSelected(SidebarItem.perfil),
-          ),
-          const SizedBox(height: 16),
         ],
       ),
     );
   }
-}
 
-class _Logo extends StatelessWidget {
-  const _Logo();
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 20,
-      backgroundColor: CostealoColors.primaryDark,
-      child: const Text(
-        'C',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+  Widget _buildItem({
+    required IconData icon,
+    required String label,
+    required int index,
+  }) {
+    final bool active = index == selectedIndex;
+    return InkWell(
+      onTap: () => onItemSelected(index),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: active ? Colors.white.withOpacity(0.12) : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
         ),
-      ),
-    );
-  }
-}
-
-class _SidebarButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const _SidebarButton({
-    required this.icon,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          width: 64,
-          height: 56,
-          decoration: BoxDecoration(
-            color: isSelected
-                ? CostealoColors.primaryDark.withOpacity(0.2)
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Icon(
-            icon,
-            color: Colors.white,
-          ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 20,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: active ? FontWeight.bold : FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

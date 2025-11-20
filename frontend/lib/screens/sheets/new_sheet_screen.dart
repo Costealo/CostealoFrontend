@@ -7,28 +7,46 @@ class NewSheetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SectionCard(
-      padding: const EdgeInsets.all(24),
-      title: '',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Nueva planilla',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: CostealoColors.text,
-              fontSize: 18,
+    return SingleChildScrollView(
+      child: SectionCard(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Nueva planilla de costos',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: CostealoColors.text,
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Aquí luego armamos la lista de ingredientes, cantidades y costos.',
-            style: TextStyle(
-              color: CostealoColors.textSoft,
+            const SizedBox(height: 16),
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Nombre del producto'),
             ),
-          ),
-        ],
+            const SizedBox(height: 12),
+            TextFormField(
+              decoration: const InputDecoration(labelText: 'Descripción'),
+              maxLines: 3,
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              decoration:
+                  const InputDecoration(labelText: 'Lote / cantidad a producir'),
+            ),
+            const SizedBox(height: 24),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Guardar planilla'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

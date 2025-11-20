@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'theme/costealo_theme.dart';
+import 'screens/auth/welcome_screen.dart';
+import 'screens/auth/login_screen.dart';
+import 'screens/auth/register_screen.dart';
 import 'screens/home/home_shell.dart';
 
 void main() {
@@ -14,8 +17,14 @@ class CostealoApp extends StatelessWidget {
     return MaterialApp(
       title: 'Costealo',
       debugShowCheckedModeBanner: false,
-      theme: buildCostealoTheme(),
-      home: const HomeShell(),
+      theme: CostealoTheme.lightTheme,
+      initialRoute: '/welcome',
+      routes: {
+        '/welcome': (_) => const WelcomeScreen(),
+        '/login': (_) => const LoginScreen(),
+        '/register': (_) => const RegisterScreen(),
+        '/home': (_) => const HomeShell(),
+      },
     );
   }
 }

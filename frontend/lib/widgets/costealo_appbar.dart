@@ -1,41 +1,31 @@
 import 'package:flutter/material.dart';
+import '../theme/costealo_theme.dart';
 
-class CostealoAppBar extends StatelessWidget {
+class CostealoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final String hintSearch;
 
   const CostealoAppBar({
     super.key,
     required this.title,
-    this.hintSearch = 'Buscar por nombre',
   });
 
   @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+  Size get preferredSize => const Size.fromHeight(64);
 
-    return Row(
-      children: [
-        Text(
-          title,
-          style: textTheme.headlineMedium,
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      titleSpacing: 24,
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: CostealoColors.text,
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
         ),
-        const Spacer(),
-        SizedBox(
-          width: 260,
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: hintSearch,
-              prefixIcon: const Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(24),
-                borderSide: BorderSide.none,
-              ),
-              filled: true,
-            ),
-          ),
-        ),
-      ],
+      ),
+      backgroundColor: Colors.white,
+      elevation: 0,
     );
   }
 }

@@ -1,118 +1,113 @@
 import 'package:flutter/material.dart';
 import '../../theme/costealo_theme.dart';
-import '../../widgets/section_card.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SectionCard(
-      padding: const EdgeInsets.all(32),
-      title: '',
-      child: Row(
-        children: [
-          Expanded(
-            child: _LoginColumn(
-              title: 'Proveedor',
-              buttonText: 'Iniciar sesión',
-            ),
+    return Scaffold(
+      backgroundColor: CostealoColors.primaryLight,
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 520),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(28),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 16,
+                offset: const Offset(0, 10),
+                color: Colors.black.withOpacity(0.06),
+              ),
+            ],
           ),
-          const SizedBox(width: 24),
-          Expanded(
-            child: _LoginColumn(
-              title: 'Empresa',
-              buttonText: 'Registrarse',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LoginColumn extends StatelessWidget {
-  final String title;
-  final String buttonText;
-
-  const _LoginColumn({
-    required this.title,
-    required this.buttonText,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: CostealoColors.cardSoft,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              color: CostealoColors.text,
-              fontSize: 18,
-            ),
-          ),
-          const SizedBox(height: 16),
-          const _AuthField(label: 'Correo electrónico'),
-          const _AuthField(label: 'Contraseña', obscure: true),
-          const Spacer(),
-          Align(
-            alignment: Alignment.centerRight,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: CostealoColors.primaryDark,
-                foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                '¡Bienvenido/a!',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: CostealoColors.primaryDark,
                 ),
               ),
-              onPressed: () {},
-              child: Text(buttonText),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+              const SizedBox(height: 32),
 
-class _AuthField extends StatelessWidget {
-  final String label;
-  final bool obscure;
+              // Correo
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Correo electrónico:',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: CostealoColors.text,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 6),
+              const TextField(
+                decoration: InputDecoration(
+                  hintText: 'ejemplo@correo.com',
+                ),
+              ),
+              const SizedBox(height: 20),
 
-  const _AuthField({
-    required this.label,
-    this.obscure = false,
-  });
+              // Contraseña
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Contraseña:',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: CostealoColors.text,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 6),
+              const TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: '••••••••',
+                ),
+              ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              color: CostealoColors.textSoft,
-              fontSize: 13,
-            ),
+              const SizedBox(height: 28),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/home');
+                  },
+                  child: const Text('Iniciar sesión'),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('¿No tienes una cuenta? '),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/register');
+                    },
+                    child: const Text(
+                      'Créate una',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: CostealoColors.primaryDark,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
-          TextField(
-            obscureText: obscure,
-          ),
-        ],
+        ),
       ),
     );
   }
